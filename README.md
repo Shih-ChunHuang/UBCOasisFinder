@@ -1,6 +1,6 @@
 # UBCOasisFinder
 
-A App about finding: 
+An App for finding: 
 
 - water fountains
 - microwaves
