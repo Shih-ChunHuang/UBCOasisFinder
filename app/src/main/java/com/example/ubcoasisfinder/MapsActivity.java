@@ -38,9 +38,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in UBC and move the camera
+        LatLng UBC = new LatLng(49.2606, -123.2460);
+        mMap.addMarker(new MarkerOptions().position(UBC).title("Marker in UBC"));
+
+        // this was original code which doesn't zoom in.
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(UBC));
+
+
+        // the default location will be UBC with zoom-in effect
+        float zoomLevel = (float) 14.0; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UBC, zoomLevel));
+
     }
 }
