@@ -43,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Restrict bound to UBC area
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
-        
+
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
         mMap.addMarker(new MarkerOptions().position(UBC).title("Marker in UBC"));
