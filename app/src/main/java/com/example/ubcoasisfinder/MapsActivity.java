@@ -2,6 +2,10 @@ package com.example.ubcoasisfinder;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,7 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     final LatLngBounds UBCBound = new LatLngBounds(
@@ -21,12 +25,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
+        getSupportActionBar().setTitle("UBC Oasis Finder");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     /**
      * Manipulates the map once available.
@@ -56,5 +63,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         float zoomLevel = (float) 14.0; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UBC, zoomLevel));
 
+    }
+
+    // TODO
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+//            case R.id.a:
+//                //Write your code
+//                return true;
+//            case R.id.b:
+//                //Write your code
+//                return true;
+//            case R.id.c:
+//                //Write your code
+//                return true;
+//            case R.id.d:
+//                //Write your code
+//                return true;
+//            case R.id.e:
+//                //Write your code
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
