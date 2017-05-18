@@ -1,0 +1,32 @@
+{
+	"waterFountain":[
+		{
+		"lat": ,
+	    "lon": ,
+	    "building": ,
+	    "floor": ,
+	    "nearBy": 
+		},
+	],
+	 "vendingMachine": [
+	 	{
+ 		"lat": , 
+	    "lon": ,
+	    "building": ,
+	    "floor": ,
+	    "nearBy": ,
+	    "type:" 
+	 	}
+	],
+	 "microwave": [
+	 	{
+	 	"lat": , 
+	    "lon": ,
+	    "building": ,
+	    "floor": ,
+	    "nearBy": ,
+	    "roomNumber": ,
+	    "generalAccess": ,
+	 	}
+	 ]
+}
