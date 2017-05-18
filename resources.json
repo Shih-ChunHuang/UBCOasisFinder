@@ -15,7 +15,8 @@
 	    "building": ,
 	    "floor": ,
 	    "nearBy": ,
-	    "type:" 
+	    "type": ,
+	    "count": , 
 	 	}
 	],
 	 "microwave": [
@@ -25,6 +26,7 @@
 	    "building": ,
 	    "floor": ,
 	    "nearBy": ,
+	    "count": ,
 	    "roomNumber": ,
 	    "generalAccess": ,
 	 	}
