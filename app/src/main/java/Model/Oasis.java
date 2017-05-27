@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Created by csam on 2017-05-18.
  */
@@ -7,8 +9,15 @@ package Model;
 public abstract class Oasis {
 
     private Amenity amenity;
-    protected double lat;
-    protected double lon;
+    private double lat;
+    private double lon;
+    private List<String> info;
+
+    public Oasis(Amenity type, double lat, double lon) {
+        this.amenity = type;
+        this.lat = lat;
+        this.lon = lon;
+    }
 
     public Amenity getAmenity() {
         return amenity;
@@ -29,8 +38,15 @@ public abstract class Oasis {
     public double getLon() {
         return lon;
     }
-
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public List<String> getInfo() {
+        return info;
+    }
+
+    public void setInfo(List<String> info) {
+        this.info = info;
     }
 }
