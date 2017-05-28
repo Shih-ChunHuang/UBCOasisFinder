@@ -1,6 +1,9 @@
 package Model;
 
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by csam on 2017-05-18.
@@ -11,12 +14,13 @@ public abstract class Oasis {
     private Amenity amenity;
     private double lat;
     private double lon;
-    private List<String> info;
+    private Map<String, String> info;
 
     public Oasis(Amenity type, double lat, double lon) {
         this.amenity = type;
         this.lat = lat;
         this.lon = lon;
+        this.info = new HashMap<>();
     }
 
     public Amenity getAmenity() {
@@ -42,11 +46,11 @@ public abstract class Oasis {
         this.lon = lon;
     }
 
-    public List<String> getInfo() {
+    public Map<String, String> getInfo() {
         return info;
     }
 
-    public void setInfo(List<String> info) {
+    public void setInfo(Map<String, String> info) {
         this.info = info;
     }
 }
