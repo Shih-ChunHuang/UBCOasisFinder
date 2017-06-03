@@ -1,18 +1,20 @@
 package Model;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 /**
  * Created by csam on 2017-05-21.
  */
 
 public enum Amenity {
-    MICROWAVE("Microwave", 0xFFDC241F),
-    VENDINGMACHINE("Vending Machine", 0xFF000000),
-    WATERFOUNTAIN("Water Fountain", 0xFF0019A8);
+    MICROWAVE("Microwave", BitmapDescriptorFactory.HUE_VIOLET),
+    VENDINGMACHINE("Vending Machine", BitmapDescriptorFactory.HUE_GREEN),
+    WATERFOUNTAIN("Water Fountain", BitmapDescriptorFactory.HUE_AZURE);
 
     private String displayName;
-    private int colour;
+    private float colour;
 
-    Amenity(String displayName, int colour) {
+    Amenity(String displayName, float colour) {
         this.displayName = displayName;
         this.colour = colour;
     }
@@ -21,7 +23,7 @@ public enum Amenity {
         return displayName;
     }
 
-    public int getColour() {
+    public float getColour() {
         return colour;
     }
 }
