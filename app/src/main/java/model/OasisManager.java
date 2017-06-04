@@ -1,10 +1,10 @@
-package Model;
+package model;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import Model.exception.OasisException;
+import model.exception.OasisException;
 
 /**
  * Created by Shih-Chun on 2017-05-27.
