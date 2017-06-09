@@ -1,12 +1,19 @@
 package com.example.ubcoasisfinder;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleMap.OnMarkerClickListener, GoogleMap.InfoWindowAdapter {
+        GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     final LatLngBounds UBCBound = new LatLngBounds(
@@ -52,6 +59,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            // allows you to provide a view that will be used for the entire info window.
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            // allows you to just customize the contents of the window but still keep the default info
+            // window frame and background.
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                Context context = MapsActivity.this; //or getActivity(), YourActivity.this, etc.
+
+                LinearLayout info = new LinearLayout(context);
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(context);
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.LEFT);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(marker.getTitle());
+
+                TextView snippet = new TextView(context);
+                snippet.setTextColor(Color.DKGRAY);
+                snippet.setText(marker.getSnippet());
+                snippet.setTextSize(12);
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
+            }
+        });
+
         // Restrict bound to UBC area
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
@@ -62,7 +104,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         LatLng ICICS = new LatLng(49.261051, -123.248901);
         Marker icicsMarker = mMap.addMarker(new MarkerOptions().position(ICICS).
-                title("Marker at ICICS").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                title("Marker at ICICS").icon(BitmapDescriptorFactory.
+                defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        icicsMarker.setSnippet("Room: X365 Room \nNear by: Elevator");
 
         // TODO
         // Parse json
@@ -100,16 +145,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
-    // allows you to provide a view that will be used for the entire info window.
-    @Override
-    public View getInfoWindow(Marker marker) {
-        return null;
-    }
 
-    // allows you to just customize the contents of the window but still keep the default info
-    // window frame and background.
-    @Override
-    public View getInfoContents(Marker marker) {
-        return null;
-    }
+
 }
