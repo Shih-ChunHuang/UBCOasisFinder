@@ -1,0 +1,37 @@
+{
+	"Water Fountain":[
+		{
+		"ID":"WF001",
+		"Lat":49.262617,
+	    "Lon":-123.245373,
+	    "Building": "Life Sciences Institute",
+	    "Floor": "1st Floor",
+	    "NearBy":"Female Washroom"
+		}
+	],
+	 "Vending Machine": [
+	 	{
+		"ID":"VM001",
+ 		"Lat":49.265394,
+	    "Lon":-123.249394,
+	    "Building":"Wesbrook Building",
+	    "Floor":"2nd Floor",
+	    "NearBy":"213 Room",
+	    "Type":"Snack",
+	    "Count":1
+	 	}
+	],
+	 "Microwave": [
+	 	{
+		"ID":"MW001",
+	 	"Lat":49.262384,
+	    "Lon":-123.242907,
+	    "Building":"ICICS Building X-Wing",
+	    "Floor": "2nd Floor",
+	    "NearBy":"Elevator",
+	    "Count":1,
+	    "RoomNumber":"X365 Room",
+	    "GeneralAccess":"No"
+	 	}
+	 ]
+}

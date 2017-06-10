@@ -60,6 +60,15 @@ public class OasisManager implements Iterable<Oasis> {
         return oasises;
     }
 
+    public void addOasises(Oasis newOasis){
+
+        if (!oasises.contains(newOasis)){
+
+            oasises.add(newOasis);
+
+        }
+
+    }
     /**
      * Get number of oasis managed
      *

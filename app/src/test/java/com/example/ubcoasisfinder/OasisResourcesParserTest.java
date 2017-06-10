@@ -1,6 +1,7 @@
-package test;
+package com.example.ubcoasisfinder;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class OasisResourcesParserTest {
     @Before
     public void setUp() throws Exception{
 
-        DataProvider dataProvider = new FileDataProvider("./main/res/raw/oasisdata.json");
+        DataProvider dataProvider = new FileDataProvider("./app/src/main/assets/oasisdata.json");
         testOasis = dataProvider.dataSourceToString();
 
 
@@ -28,13 +29,6 @@ public class OasisResourcesParserTest {
 
     @Test
     public void testBasicOasisParsing() throws JSONException {
-
-        try{
-        OasisResourcesParser temp = new OasisResourcesParser();
-        temp.parseOasis(null, testOasis);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
 
     }
 
