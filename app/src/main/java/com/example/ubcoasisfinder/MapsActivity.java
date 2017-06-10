@@ -57,6 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
+
         getSupportActionBar().setTitle(mActivityTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -113,8 +114,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        // Restrict bound to UBC area
+        // Restrict bound to UBC area (to delete later) *************************//
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
+
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
@@ -127,11 +129,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         icicsMarker.setSnippet("Room: X365 Room \nNear by: Elevator");
+        ubcMarker.setSnippet("The University of British Columbia");
+        // ********************************************************************//
+
 
         // TODO
         // Parse json
         // create oasis objects for each json
         // make markers and set info window for each oasis object
+        // create helper function and call it from here
 
         // the default location will be UBC with zoom-in effect
         float zoomLevel = (float) 14.0; //This goes up to 21
@@ -179,6 +185,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void addDrawerItems() {
         String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsArray);
+        mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mDrawerList.setAdapter(mAdapter);
     }
 
