@@ -18,7 +18,7 @@
 	    "Floor":"2nd Floor",
 	    "NearBy":"213 Room",
 	    "Type":"Snack",
-	    "Count":1
+	    "Count":"1"
 	 	}
 	],
 	 "Microwave": [
@@ -29,7 +29,7 @@
 	    "Building":"ICICS Building X-Wing",
 	    "Floor": "2nd Floor",
 	    "NearBy":"Elevator",
-	    "Count":1,
+	    "Count":"1",
 	    "RoomNumber":"X365 Room",
 	    "GeneralAccess":"No"
 	 	}

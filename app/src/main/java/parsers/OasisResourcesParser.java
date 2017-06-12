@@ -5,15 +5,14 @@ package parsers;
  */
 
 
-import android.util.JsonReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.IOException;
-import java.io.StringReader;
+
+import java.util.Map;
 
 import model.Amenity;
 import model.Oasis;
@@ -34,43 +33,76 @@ public class OasisResourcesParser {
 
     public void parse() throws IOException, JSONException {
         DataProvider dataProvider = new FileDataProvider(filename);
-        parseOasis(dataProvider.dataSourceToString());
+        parseOasises(dataProvider.dataSourceToString());
     }
 
 
-    public static void parseOasis(String jsonResponse) throws JSONException{
+    public static void parseOasises(String jsonResponse) throws JSONException{
 
-        OasisManager oasisManager = OasisManager.getInstance();
+
 
         JSONObject jsonObject = new JSONObject(jsonResponse);
         JSONArray waterFountain = jsonObject.getJSONArray(Amenity.WATERFOUNTAIN.getDisplayName());
         JSONArray microwave = jsonObject.getJSONArray(Amenity.MICROWAVE.getDisplayName());
         JSONArray vendingMachine = jsonObject.getJSONArray(Amenity.VENDINGMACHINE.getDisplayName());
 
-        for (int i=0; i < waterFountain.length(); i++ ){
-
-            JSONObject oneWaterFountain = waterFountain.getJSONObject(i);
-            double waterFountainLat = oneWaterFountain.getDouble("Lat");
-            double waterFountainLon = oneWaterFountain.getDouble("Lon");
-            String waterFountainBuilding = oneWaterFountain.getString("Building");
-            String waterFountainFloor = oneWaterFountain.getString("Floor");
-            String waterFountainNearby = oneWaterFountain.getString("NearBy");
+        parseOneOasis(Amenity.WATERFOUNTAIN ,waterFountain);
+        parseOneOasis(Amenity.MICROWAVE, microwave);
+        parseOneOasis(Amenity.VENDINGMACHINE, vendingMachine);
 
 
-            Oasis newOasis = new Oasis(Amenity.WATERFOUNTAIN, waterFountainLat, waterFountainLon);
+    }
 
+
+    public static void parseOneOasis(Amenity amenity,JSONArray oasisArray) throws JSONException {
+
+        OasisManager oasisManager = OasisManager.getInstance();
+
+        for (int i=0; i < oasisArray.length(); i++ ){
+
+            JSONObject oneOasisArray = oasisArray.getJSONObject(i);
+            double oasisLat = oneOasisArray.getDouble("Lat");
+            double oasisLon = oneOasisArray.getDouble("Lon");
+            String oasisBuilding = oneOasisArray.getString("Building");
+            String oasisFloor = oneOasisArray.getString("Floor");
+            String oasisNB = oneOasisArray.getString("NearBy");
+            String oasisID = oneOasisArray.getString("ID");
+
+            Oasis newOasis = new Oasis(amenity, oasisLat, oasisLon);
+            Map<String, String> temp = null;
+
+            if (newOasis.getAmenity().getDisplayName().equals(Amenity.VENDINGMACHINE)){
+
+                String oneVendingMachineCount = oneOasisArray.getString("Count");
+                String oneVendingMachineType= oneOasisArray.getString("Type");
+
+                temp.put("Count", oneVendingMachineCount);
+                temp.put("Type", oneVendingMachineType);
+
+            }
+
+            if(newOasis.getAmenity().getDisplayName().equals(Amenity.MICROWAVE)){
+
+                String oneMicrowaveCount = oneOasisArray.getString("Count");
+                String oneMicrowaveRoomNum = oneOasisArray.getString("RoomNumber");
+                String oneMicrowaveGA = oneOasisArray.getString("GeneralAccess");
+
+                temp.put("Count", oneMicrowaveCount);
+                temp.put("RoomNumber", oneMicrowaveRoomNum);
+                temp.put("GeneralAccess", oneMicrowaveGA);
+
+
+            }
+
+            temp.put("Building", oasisBuilding);
+            temp.put("ID", oasisID);
+            temp.put("Floor", oasisFloor);
+            temp.put("NearBy", oasisNB);
+
+            newOasis.setInfo(temp);
             oasisManager.addOasises(newOasis);
 
-
         }
-
-
-
-
-
-
-
-
 
     }
 
