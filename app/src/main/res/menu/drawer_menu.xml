@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="all">
+        <item
+            android:checked="true"
+            android:id="@+id/drawer_item_mw"
+            android:title="Microwaves"/>
+        <item
+            android:id="@+id/drawer_item_vm"
+            android:title="Vending Machines"/>
+        <item
+            android:id="@+id/drawer_item_wf"
+            android:title="Water Fountains"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/drawer_item_about"
+            android:title="About" >
+        </item>
+        <item
+            android:id="@+id/drawer_item_feedback"
+            android:title="Give feedback" >
+        </item>
+    </group>
+</menu>

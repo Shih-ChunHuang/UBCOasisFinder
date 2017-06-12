@@ -184,7 +184,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void addDrawerItems() {
         String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsArray);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, optionsArray);
+        //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsArray);
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mDrawerList.setAdapter(mAdapter);
     }
