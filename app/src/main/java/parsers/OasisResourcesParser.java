@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import model.Amenity;
@@ -39,9 +40,9 @@ public class OasisResourcesParser {
 
     public static void parseOasises(String jsonResponse) throws JSONException{
 
-
-
         JSONObject jsonObject = new JSONObject(jsonResponse);
+
+
         JSONArray waterFountain = jsonObject.getJSONArray(Amenity.WATERFOUNTAIN.getDisplayName());
         JSONArray microwave = jsonObject.getJSONArray(Amenity.MICROWAVE.getDisplayName());
         JSONArray vendingMachine = jsonObject.getJSONArray(Amenity.VENDINGMACHINE.getDisplayName());
@@ -69,7 +70,8 @@ public class OasisResourcesParser {
             String oasisID = oneOasisArray.getString("ID");
 
             Oasis newOasis = new Oasis(amenity, oasisLat, oasisLon);
-            Map<String, String> temp = null;
+            //Map<String, String> temp = null;
+            Map<String, String> temp = new HashMap<String, String>();
 
             if (newOasis.getAmenity().getDisplayName().equals(Amenity.VENDINGMACHINE)){
 
