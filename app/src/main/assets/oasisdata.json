@@ -6,7 +6,7 @@
 	    "Lon":-123.245373,
 	    "Building": "Life Sciences Institute",
 	    "Floor": "1st Floor",
-	    "NearBy":"Female Washroom"
+	    "Near By":"Female Washroom"
 		}
 	],
 	 "Vending Machine": [
@@ -16,7 +16,7 @@
 	    "Lon":-123.249394,
 	    "Building":"Wesbrook Building",
 	    "Floor":"2nd Floor",
-	    "NearBy":"213 Room",
+	    "Near By":"213 Room",
 	    "Type":"Snack",
 	    "Count":"1"
 	 	}
@@ -28,10 +28,10 @@
 	    "Lon":-123.242907,
 	    "Building":"ICICS Building X-Wing",
 	    "Floor": "2nd Floor",
-	    "NearBy":"Elevator",
+	    "Near By":"Elevator",
 	    "Count":"1",
-	    "RoomNumber":"X365 Room",
-	    "GeneralAccess":"No"
+	    "Room Number":"X365 Room",
+	    "General Access":"No"
 	 	}
 	 ]
 }
