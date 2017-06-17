@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by csam on 2017-05-18.
  */
 
-public abstract class Oasis {
+public class Oasis {
 
     private Amenity amenity;
     private double lat;
