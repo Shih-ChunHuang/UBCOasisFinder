@@ -1,37 +1,53 @@
 {
 	"Water Fountain":[
 		{
-		"ID":"WF001",
-		"Lat":49.262617,
-	    "Lon":-123.245373,
-	    "Building": "Life Sciences Institute",
-	    "Floor": "1st Floor",
-	    "Near By":"Female Washroom"
-		}
+          "ID":"WF001",
+          "Lat":49.26268,
+          "Lon":-123.24526,
+          "Building": "Life Sciences Institute",
+          "Floor": "1st Floor",
+          "Near By":"Room 1.416, Stair"
+		},
+		{
+          "ID":"WF002",
+          "Lat":49.26235,
+          "Lon":-123.24683,
+          "Building": "Chemical and Biological Engineering Building",
+          "Floor": "1st Floor",
+          "Near By":"Room106, Room140"
+		},
+        {
+          "ID":"WF003",
+          "Lat":49.26119,
+          "Lon":-123.249,
+          "Building": "ICICS Building X-Wing",
+          "Floor": "2nd Floor",
+          "Near By":"Male Washroom, Elevator"
+        }
 	],
 	 "Vending Machine": [
 	 	{
-		"ID":"VM001",
- 		"Lat":49.265394,
-	    "Lon":-123.249394,
-	    "Building":"Wesbrook Building",
-	    "Floor":"2nd Floor",
-	    "Near By":"213 Room",
-	    "Type":"Snack",
-	    "Count":"1"
+          "ID":"VM001",
+          "Lat":49.265394,
+          "Lon":-123.249394,
+          "Building":"Wesbrook Building",
+          "Floor":"2nd Floor",
+          "Near By":"213 Room",
+          "Type":"Snack",
+          "Count":"1"
 	 	}
 	],
 	 "Microwave": [
 	 	{
-		"ID":"MW001",
-	 	"Lat":49.262384,
-	    "Lon":-123.242907,
-	    "Building":"ICICS Building X-Wing",
-	    "Floor": "2nd Floor",
-	    "Near By":"Elevator",
-	    "Count":"1",
-	    "Room Number":"X365 Room",
-	    "General Access":"No"
+          "ID":"MW001",
+          "Lat":49.262384,
+          "Lon":-123.242907,
+          "Building":"ICICS Building X-Wing",
+          "Floor": "2nd Floor",
+          "Near By":"Elevator",
+          "Count":"1",
+          "Room Number":"X365 Room",
+          "General Access":"No"
 	 	}
 	 ]
 }

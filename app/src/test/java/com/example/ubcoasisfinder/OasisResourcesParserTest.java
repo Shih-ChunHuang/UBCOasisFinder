@@ -43,8 +43,6 @@ public class OasisResourcesParserTest {
             e.printStackTrace();
         }catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            assertTrue(true);
         }
     }
 
