@@ -20,7 +20,7 @@
           "ID":"WF003",
           "Lat":49.261306,
           "Lon":-123.248508,
-          "Building": "ICICS X-Wing",
+          "Building": "Computer Science Building X-Wing",
           "Floor": "2nd Floor",
           "Near By":"Male Washroom, Elevator"
         },
@@ -49,11 +49,21 @@
          "ID":"VM002",
          "Lat":49.261362,
          "Lon":-123.248905,
-         "Building":"ICICS",
+         "Building":"Computer Science Building",
          "Floor":"1st Floor",
          "Near By":"Reboot Cafe",
          "Type":"Snack, Drink",
          "Count":"4"
+       },
+       {
+         "ID":"VM003",
+         "Lat":49.2674,
+         "Lon":-123.25677,
+         "Building":"Music Building",
+         "Floor":"3rd Floor",
+         "Near By":"Music Cafe",
+         "Type":"Drink",
+         "Count":"1"
        }
 	],
 	 "Microwave": [
@@ -67,6 +77,26 @@
           "Count":"1",
           "Room Number":"X365 Room",
           "General Access":"No"
-	 	}
+	 	},
+       {
+         "ID":"MW002",
+         "Lat":49.26108,
+         "Lon":-123.25106,
+         "Building":"MacMillan Building",
+         "Floor": "1st Floor",
+         "Near By":"Room 154",
+         "Count":"1",
+         "General Access":"No"
+       },
+       {
+         "ID":"MW003",
+         "Lat":49.2679,
+         "Lon":-123.25299,
+         "Building":"Irving K. Barber Library",
+         "Floor": "1st Floor",
+         "Near By":"Room 214",
+         "Count":"1",
+         "General Access":"Yes"
+       }
 	 ]
 }
