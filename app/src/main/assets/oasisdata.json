@@ -31,6 +31,14 @@
           "Building": "Hugh Dempster Pavilion",
           "Floor": "1st Floor",
           "Near By":"Male Washroom, Elevator"
+        },
+        {
+          "ID":"WF005",
+          "Lat":49.2477651,
+          "Lon":-123.2151103,
+          "Building": "Macleod Building",
+          "Floor": "2nd Floor",
+          "Near By":"Female Washroom"
         }
 
 	],
@@ -42,7 +50,7 @@
           "Building":"Wesbrook Building",
           "Floor":"2nd Floor",
           "Near By":"213 Room",
-          "Type":"Snack",
+          "Type":"Snacks",
           "Count":"1"
 	 	},
        {
@@ -52,7 +60,7 @@
          "Building":"Computer Science Building",
          "Floor":"1st Floor",
          "Near By":"Reboot Cafe",
-         "Type":"Snack, Drink",
+         "Type":"Snacks, Drinks",
          "Count":"4"
        },
        {
@@ -62,7 +70,17 @@
          "Building":"Music Building",
          "Floor":"3rd Floor",
          "Near By":"Music Cafe",
-         "Type":"Drink",
+         "Type":"Drinks",
+         "Count":"1"
+       },
+       {
+         "ID":"VM004",
+         "Lat":49.26268,
+         "Lon":-123.24526,
+         "Building": "Life Sciences Institute",
+         "Floor": "1st Floor",
+         "Near By":"Women's washroom",
+         "Type":"Snacks",
          "Count":"1"
        }
 	],
@@ -96,6 +114,16 @@
          "Floor": "1st Floor",
          "Near By":"Room 214",
          "Count":"1",
+         "General Access":"Yes"
+       },
+       {
+         "ID":"MW004",
+         "Lat":49.2623598,
+         "Lon":-123.2433241,
+         "Building":"Pharmaceutical Sciences Building",
+         "Floor": "1st Floor",
+         "Near By":"Daily Dose Cafe",
+         "Count":"2",
          "General Access":"Yes"
        }
 	 ]
