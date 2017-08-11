@@ -1,6 +1,7 @@
 package com.example.ubcoasisfinder;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +32,21 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.Set;
+
+import model.Oasis;
+import model.OasisManager;
+import parsers.AbstractFileDataProvider;
+import parsers.FileDataProvider;
+import parsers.OasisResourcesParser;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
@@ -39,6 +56,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private String mActivityTitle;
+
+
 
     final LatLngBounds UBCBound = new LatLngBounds(
             new LatLng(49.24, -123.26), new LatLng(49.28, -123.23));
@@ -64,6 +83,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         addDrawerItems();
         setupDrawer();
+        createMarker();
     }
 
     /**
@@ -117,6 +137,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Restrict bound to UBC area (to delete later) *************************//
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
+        OasisManager oasisManager = OasisManager.getInstance();
+        for (Oasis oneOasis : oasisManager.getOasises()){
+            LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
+            Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
+                    icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+
+            onepMarker.setSnippet(String.valueOf(oneOasis.getInfo()));
+
+        }
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
@@ -181,6 +210,32 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+    private void createMarker(){
+        try {
+            AssetManager assetManager = getAssets();
+            InputStream inputStream = assetManager.open("oasisdata.json");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+            while((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+
+            br.close();
+
+            OasisResourcesParser.parseOasises(sb.toString());
+
+        }catch (JSONException e){
+
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
 
     private void addDrawerItems() {
         String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
@@ -217,6 +272,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

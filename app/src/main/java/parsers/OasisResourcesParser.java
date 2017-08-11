@@ -6,6 +6,8 @@ package parsers;
 
 
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +42,7 @@ public class OasisResourcesParser {
 
 
     public static void parseOasises(String jsonResponse) throws JSONException{
-
+        Log.i("This is what I want:", jsonResponse);
         JSONObject jsonObject = new JSONObject(jsonResponse);
 
         for (Amenity am : Amenity.values()) {

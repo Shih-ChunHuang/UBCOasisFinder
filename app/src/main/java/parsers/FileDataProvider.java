@@ -1,5 +1,7 @@
 package parsers;
 
+import android.content.res.AssetManager;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

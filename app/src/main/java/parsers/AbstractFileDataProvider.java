@@ -23,7 +23,7 @@ public abstract class AbstractFileDataProvider implements DataProvider{
      * @return  source data as string
      * @throws IOException  when error occurs reading data from file
      */
-    protected String readSource(InputStream is) throws IOException {
+    public String readSource(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;

@@ -20,7 +20,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class OasisResourcesParserTest {
 
-    private String testOasis;
     private OasisResourcesParser orp;
 
     @Before
