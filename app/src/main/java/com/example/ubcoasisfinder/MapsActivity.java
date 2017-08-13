@@ -5,13 +5,10 @@ import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Environment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,13 +35,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
+
 
 import model.Oasis;
 import model.OasisManager;
-import parsers.AbstractFileDataProvider;
-import parsers.FileDataProvider;
 import parsers.OasisResourcesParser;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -84,6 +79,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         addDrawerItems();
         setupDrawer();
         createMarker();
+
     }
 
     /**
@@ -137,36 +133,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Restrict bound to UBC area (to delete later) *************************//
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
-        OasisManager oasisManager = OasisManager.getInstance();
-        for (Oasis oneOasis : oasisManager.getOasises()){
-            LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
-            Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
-                    icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-
-            onepMarker.setSnippet(String.valueOf(oneOasis.getInfo()));
-
-        }
+        drawMarker();
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
-        Marker ubcMarker = mMap.addMarker(new MarkerOptions().position(UBC).title("Marker in UBC").
-                icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-
-        LatLng ICICS = new LatLng(49.261051, -123.248901);
-        Marker icicsMarker = mMap.addMarker(new MarkerOptions().position(ICICS).
-                title("Marker at ICICS").icon(BitmapDescriptorFactory.
-                defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        icicsMarker.setSnippet("Room: X365 Room \nNear by: Elevator");
-        ubcMarker.setSnippet("The University of British Columbia");
+//        Marker ubcMarker = mMap.addMarker(new MarkerOptions().position(UBC).title("Marker in UBC").
+//                icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+//
+//        LatLng ICICS = new LatLng(49.261051, -123.248901);
+//        Marker icicsMarker = mMap.addMarker(new MarkerOptions().position(ICICS).
+//                title("Marker at ICICS").icon(BitmapDescriptorFactory.
+//                defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+//
+//        icicsMarker.setSnippet("Room: X365 Room \nNear by: Elevator");
+//        ubcMarker.setSnippet("The University of British Columbia");
         // ********************************************************************//
 
 
         // TODO
-        // Parse json
-        // create oasis objects for each json
-        // make markers and set info window for each oasis object
-        // create helper function and call it from here
+        // click check box and filter one kind of oasis
 
         // the default location will be UBC with zoom-in effect
         float zoomLevel = (float) 14.0; //This goes up to 21
@@ -188,6 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
         switch (item.getItemId()) {
 //            case R.id.a:
 //                //Write your code
@@ -210,16 +196,81 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+//    private void drawCategoryMarker(String name){
+//        OasisManager oasisManager = OasisManager.getInstance();
+//        for (Oasis oneOasis : oasisManager.getOasises()){
+//
+//            if(oneOasis.getAmenity().getDisplayName().equals(name)){
+//
+//                LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
+//                Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
+//                        icon(BitmapDescriptorFactory.defaultMarker(oneOasis.getAmenity().getColour())));
+//
+//                onepMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
+//
+//            }
+//        }
+//    }
+
+    /**
+     * reading data from OasisManager and draw it on the map
+     */
+    private void drawMarker(){
+
+        OasisManager oasisManager = OasisManager.getInstance();
+        for (Oasis oneOasis : oasisManager.getOasises()){
+            LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
+            Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
+                    icon(BitmapDescriptorFactory.defaultMarker(oneOasis.getAmenity().getColour())));
+
+            onepMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
+
+        }
+    }
+
+    /**
+     * parse getInfo from Map to String
+     */
+    private String parseInfo(Map<String, String> info) {
+
+        String infoSession = "";
+        String colon = " : ";
+        String newLine = "\n";
+
+        for (String item :info.keySet()){
+            infoSession += item + colon + info.get(item) + newLine;
+        }
+
+        return infoSession;
+    }
+
+    /**
+     * get file from assets folder
+     */
     private void createMarker(){
+
         try {
             AssetManager assetManager = getAssets();
             InputStream inputStream = assetManager.open("oasisdata.json");
+            readSource(inputStream);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     *  read file line by ine and parse data to OasisManager
+     */
+    private void readSource(InputStream inputStream){
+
+        try {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder sb = new StringBuilder();
             String line;
 
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");
             }
@@ -229,11 +280,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             OasisResourcesParser.parseOasises(sb.toString());
 
         }catch (JSONException e){
-
             e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
         }
+
     }
 
 
