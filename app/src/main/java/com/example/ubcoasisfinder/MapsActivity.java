@@ -175,15 +175,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         switch (item.getItemId()) {
-//            case R.id.a:
-//                //Write your code
-//                return true;
-//            case R.id.b:
-//                //Write your code
-//                return true;
-//            case R.id.c:
-//                //Write your code
-//                return true;
+            case R.id.drawer_item_mw:
+                //Write your code
+                return true;
+            case R.id.drawer_item_vm:
+                //Write your code
+                return true;
+            case R.id.drawer_item_wf:
+                //Write your code
+                return true;
+            case R.id.drawer_item_about:
+                //Write your code
+                return true;
+            case R.id.drawer_item_feedback:
+                //Write your code
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -238,7 +244,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         String newLine = "\n";
 
         for (String item :info.keySet()){
-            infoSession += item + colon + info.get(item) + newLine;
+            if (!item.equals("ID")) {
+                infoSession += item + colon + info.get(item) + newLine;
+            }
         }
 
         return infoSession;
