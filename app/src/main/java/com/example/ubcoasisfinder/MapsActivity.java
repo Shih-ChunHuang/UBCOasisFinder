@@ -47,6 +47,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+
     private ListView mDrawerList;
 
     private NavigationView mDrawer;
@@ -81,7 +82,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        addDrawerItems();
+        //addDrawerItems();
         setupDrawer();
         createMarker();
 
@@ -135,25 +136,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        // Restrict bound to UBC area (to delete later) *************************//
+        // Restrict bound to UBC area
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
         drawMarker();
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
-//        Marker ubcMarker = mMap.addMarker(new MarkerOptions().position(UBC).title("Marker in UBC").
-//                icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-//
-//        LatLng ICICS = new LatLng(49.261051, -123.248901);
-//        Marker icicsMarker = mMap.addMarker(new MarkerOptions().position(ICICS).
-//                title("Marker at ICICS").icon(BitmapDescriptorFactory.
-//                defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-//
-//        icicsMarker.setSnippet("Room: X365 Room \nNear by: Elevator");
-//        ubcMarker.setSnippet("The University of British Columbia");
-        // ********************************************************************//
-
 
         // TODO
         // click check box and filter one kind of oasis
@@ -228,7 +217,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     private void drawMarker(){
 
+        mMap.clear();
+
         OasisManager oasisManager = OasisManager.getInstance();
+
         for (Oasis oneOasis : oasisManager.getOasises()){
             LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
             Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
@@ -301,12 +293,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    private void addDrawerItems() {
+    //private void addDrawerItems() {
         //String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
         //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, optionsArray);
         //mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         //mDrawerList.setAdapter(mAdapter);
-    }
+    //}
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
