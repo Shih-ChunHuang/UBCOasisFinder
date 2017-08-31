@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,12 +48,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private ListView mDrawerList;
-    private ArrayAdapter<String> mAdapter;
-    private ActionBarDrawerToggle mDrawerToggle;
+
+    private NavigationView mDrawer;
     private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private ArrayAdapter<String> mAdapter;
     private String mActivityTitle;
-
-
 
     final LatLngBounds UBCBound = new LatLngBounds(
             new LatLng(49.24, -123.26), new LatLng(49.28, -123.23));
@@ -67,7 +69,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawer = (NavigationView) findViewById(R.id.main_drawer);
+
+        //mDrawerList = (ListView)findViewById(R.id.navList);
+
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
@@ -297,11 +302,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void addDrawerItems() {
-        String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, optionsArray);
-        //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsArray);
-        mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        mDrawerList.setAdapter(mAdapter);
+        //String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
+        //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, optionsArray);
+        //mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        //mDrawerList.setAdapter(mAdapter);
     }
 
     private void setupDrawer() {

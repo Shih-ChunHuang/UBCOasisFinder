@@ -2,23 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
         android:id="@+id/menu_top"
-        android:checkableBehavior="all">
+        android:checkableBehavior="none">
+
         <item
-            android:checked="true"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/drawer_item_mw"
-            android:title="Microwaves"/>
+            android:title="Microwaves"
+            android:checkable="false"
+            app:actionViewClass="android.widget.CheckBox"/>
         <item
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/drawer_item_vm"
-            android:title="Vending Machines"/>
+            android:title="Vending Machines"
+            android:checkable="false"
+            app:actionViewClass="android.widget.CheckBox"/>
         <item
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/drawer_item_wf"
-            android:title="Water Fountains"/>
+            android:title="Water Fountains"
+            android:checkable="false"
+            app:actionViewClass="android.widget.CheckBox"/>
     </group>
 
     <group
         android:id="@+id/menu_bottom"
-        android:checkableBehavior="none">
-
+        android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_item_about"
             android:title="About" >
