@@ -1,130 +1,94 @@
 {
 	"Water Fountain":[
-		{
-          "ID":"WF001",
-          "Lat":49.26268,
-          "Lon":-123.24526,
-          "Building": "Life Sciences Institute",
-          "Floor": "1st Floor",
-          "Near By":"Room 1.416, Stair"
-		},
-		{
-          "ID":"WF002",
-          "Lat":49.26235,
-          "Lon":-123.24683,
-          "Building": "Chemical and Biological Engineering Building",
-          "Floor": "1st Floor",
-          "Near By":"Room106, Room140"
-		},
         {
-          "ID":"WF003",
-          "Lat":49.261306,
-          "Lon":-123.248508,
+          "ID":"WF00",
+          "Lat":49.261103,
+          "Lon":-123.248571,
           "Building": "Computer Science Building X-Wing",
           "Floor": "2nd Floor",
-          "Near By":"Male Washroom, Elevator"
+          "Near By":"Men Washroom, Elevator"
         },
         {
-          "ID":"WF004",
-          "Lat":49.26129,
-          "Lon":-123.24807,
-          "Building": "Hugh Dempster Pavilion",
+          "ID":"WF00",
+          "Lat":49.260550,
+          "Lon":-123.248571,
+          "Building": "Forest Sciences Centre",
           "Floor": "1st Floor",
-          "Near By":"Male Washroom, Elevator"
+          "Near By":"Women Washroom, Room 1005"
         },
         {
-          "ID":"WF005",
-          "Lat":49.2477651,
-          "Lon":-123.2151103,
+          "ID":"WF00",
+          "Lat":49.261825,
+          "Lon":-123.249591,
           "Building": "Macleod Building",
           "Floor": "2nd Floor",
-          "Near By":"Female Washroom"
+          "Near By":"Room 214"
+        },
+        {
+          "ID":"WF00",
+          "Lat":49.26166,
+          "Lon":-123.2492,
+          "Building": "Macleod Building",
+          "Floor": "1st Floor",
+          "Near By":"Room 148"
+        },
+        {
+          "ID":"WF00",
+          "Lat":49.26166,
+          "Lon":-123.2492,
+          "Building": "Macleod Building",
+          "Floor": "3rd Floor",
+          "Near By":"Room 348"
+        },
+        {
+          "ID":"WF00",
+          "Lat":49.26166,
+          "Lon":-123.2492,
+          "Building": "Macleod Building",
+          "Floor": "4th Floor",
+          "Near By":"Room 448"
+        },
+        {
+          "ID":"WF00",
+          "Lat":49.26104,
+          "Lon":-123.25119,
+          "Building": "MacMillan",
+          "Floor": "Ground Floor",
+          "Near By":"Agora Cafe"
         }
 
 	],
 	 "Vending Machine": [
 	 	{
-          "ID":"VM001",
-          "Lat":49.265394,
-          "Lon":-123.249394,
-          "Building":"Wesbrook Building",
-          "Floor":"2nd Floor",
-          "Near By":"213 Room",
+          "ID":"VM00",
+          "Lat":49.262289,
+          "Lon":-123.250012,
+          "Building":"Fred Kaiser",
+          "Floor":"1st Floor",
+          "Near By":"Room 1160",
           "Type":"Snacks",
           "Count":"1"
 	 	},
        {
-         "ID":"VM002",
-         "Lat":49.261362,
-         "Lon":-123.248905,
-         "Building":"Computer Science Building",
+         "ID":"VM00",
+         "Lat":49.262289,
+         "Lon":-123.250012,
+         "Building":"Fred Kaiser",
          "Floor":"1st Floor",
-         "Near By":"Reboot Cafe",
-         "Type":"Snacks, Drinks",
-         "Count":"4"
-       },
-       {
-         "ID":"VM003",
-         "Lat":49.2674,
-         "Lon":-123.25677,
-         "Building":"Music Building",
-         "Floor":"3rd Floor",
-         "Near By":"Music Cafe",
+         "Near By":"Room 1160",
          "Type":"Drinks",
-         "Count":"1"
-       },
-       {
-         "ID":"VM004",
-         "Lat":49.26268,
-         "Lon":-123.24526,
-         "Building": "Life Sciences Institute",
-         "Floor": "1st Floor",
-         "Near By":"Women's washroom",
-         "Type":"Snacks",
-         "Count":"1"
+         "Count":"2"
        }
 	],
 	 "Microwave": [
 	 	{
-          "ID":"MW001",
-          "Lat":49.262384,
-          "Lon":-123.242907,
-          "Building":"ICICS Building X-Wing",
-          "Floor": "2nd Floor",
-          "Near By":"Elevator",
-          "Count":"1",
-          "Room Number":"X365 Room",
-          "General Access":"No"
-	 	},
-       {
-         "ID":"MW002",
-         "Lat":49.26108,
-         "Lon":-123.25106,
-         "Building":"MacMillan Building",
-         "Floor": "1st Floor",
-         "Near By":"Room 154",
-         "Count":"1",
-         "General Access":"No"
-       },
-       {
-         "ID":"MW003",
-         "Lat":49.2679,
-         "Lon":-123.25299,
-         "Building":"Irving K. Barber Library",
-         "Floor": "1st Floor",
-         "Near By":"Room 214",
-         "Count":"1",
-         "General Access":"Yes"
-       },
-       {
-         "ID":"MW004",
-         "Lat":49.2623598,
-         "Lon":-123.2433241,
-         "Building":"Pharmaceutical Sciences Building",
-         "Floor": "1st Floor",
-         "Near By":"Daily Dose Cafe",
-         "Count":"2",
-         "General Access":"Yes"
-       }
+          "ID":"MW00",
+          "Lat":49.260858,
+          "Lon":-123.248966,
+          "Building":"Computer Science Building Main",
+          "Floor": "Basement",
+          "Count":"2",
+          "Room Number":"Room 021"
+	 	}
 	 ]
 }
