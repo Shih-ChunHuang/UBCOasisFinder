@@ -39,9 +39,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
+import model.Amenity;
 import model.Oasis;
 import model.OasisManager;
 import parsers.OasisResourcesParser;
@@ -51,14 +55,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
 
-    private ListView mDrawerList;
-
     private NavigationView mDrawer;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private ArrayAdapter<String> mAdapter;
     private String mActivityTitle;
+    private List<String> selectedTypes;
 
     final LatLngBounds UBCBound = new LatLngBounds(
             new LatLng(49.24, -123.26), new LatLng(49.28, -123.23));
@@ -73,18 +75,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // Set up navigational drawer
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
-
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        // Set up action bar
         mActivityTitle = getTitle().toString();
-
-
         getSupportActionBar().setTitle(mActivityTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        //addDrawerItems();
+        // Set all checkboxes as checked initially
+        selectedTypes = new LinkedList<>();
+        int i = 0;
+
+        for (Amenity thisAmenity : Amenity.values()) {
+            CheckBox cb = (CheckBox) mDrawer.getMenu().getItem(i).getActionView();
+            cb.setChecked(true);
+            selectedTypes.add(thisAmenity.getDisplayName());
+            i++;
+        }
+
         setupDrawer();
         createMarker();
 
@@ -141,7 +153,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Restrict bound to UBC area
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
-        drawMarker();
+        //drawMarker();
+        drawCategoryMarker(null);
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
@@ -189,22 +202,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             CheckBox cb = (CheckBox) item.getActionView();
 
-            if (cb.isChecked()) cb.setChecked(false);
-            else cb.setChecked(true);
+            if (cb.isChecked()) {
+                cb.setChecked(false);
+                selectedTypes.remove(Amenity.MICROWAVE.getDisplayName());
+            }
+            else {
+                cb.setChecked(true);
+                selectedTypes.add(Amenity.MICROWAVE.getDisplayName());
+            }
 
         } else if (id == R.id.drawer_item_vm) {
 
             CheckBox cb = (CheckBox) item.getActionView();
 
-            if (cb.isChecked()) cb.setChecked(false);
-            else cb.setChecked(true);
+            if (cb.isChecked()) {
+                cb.setChecked(false);
+                selectedTypes.remove(Amenity.VENDINGMACHINE.getDisplayName());
+            }
+            else {
+                cb.setChecked(true);
+                selectedTypes.add(Amenity.VENDINGMACHINE.getDisplayName());
+            }
 
         } else if (id == R.id.drawer_item_wf) {
 
             CheckBox cb = (CheckBox) item.getActionView();
 
-            if (cb.isChecked()) cb.setChecked(false);
-            else cb.setChecked(true);
+            if (cb.isChecked()) {
+                cb.setChecked(false);
+                selectedTypes.remove(Amenity.WATERFOUNTAIN.getDisplayName());
+            }
+            else {
+                cb.setChecked(true);
+                selectedTypes.add(Amenity.WATERFOUNTAIN.getDisplayName());
+            }
 
         } else if (id == R.id.drawer_item_about) {
 
@@ -227,21 +258,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
-//    private void drawCategoryMarker(String name){
-//        OasisManager oasisManager = OasisManager.getInstance();
-//        for (Oasis oneOasis : oasisManager.getOasises()){
-//
-//            if(oneOasis.getAmenity().getDisplayName().equals(name)){
-//
-//                LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
-//                Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
-//                        icon(BitmapDescriptorFactory.defaultMarker(oneOasis.getAmenity().getColour())));
-//
-//                onepMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
-//
-//            }
-//        }
-//    }
+    private void drawCategoryMarker(List<String> names){
+
+        mMap.clear();
+
+        OasisManager oasisManager = OasisManager.getInstance();
+
+        for (Oasis oneOasis : oasisManager.getOasises()){
+
+            if (names == null || names.contains(oneOasis.getAmenity().getDisplayName())){
+
+                LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
+                Marker oneMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
+                        icon(BitmapDescriptorFactory.defaultMarker(oneOasis.getAmenity().getColour())));
+
+                oneMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
+
+            }
+        }
+    }
 
     /**
      * reading data from OasisManager and draw it on the map
@@ -254,10 +289,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (Oasis oneOasis : oasisManager.getOasises()){
             LatLng oneLatLng = new LatLng(oneOasis.getLat(), oneOasis.getLon());
-            Marker onepMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
+            Marker oneMarker = mMap.addMarker(new MarkerOptions().position(oneLatLng).title(oneOasis.getAmenity().getDisplayName()).
                     icon(BitmapDescriptorFactory.defaultMarker(oneOasis.getAmenity().getColour())));
 
-            onepMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
+            oneMarker.setSnippet(String.valueOf(parseInfo(oneOasis.getInfo())));
 
         }
     }
@@ -324,13 +359,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    //private void addDrawerItems() {
-        //String[] optionsArray = { "Microwaves", "Vending Machines", "Water Fountains", "", "About", "Give Feedback"};
-        //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, optionsArray);
-        //mDrawerList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        //mDrawerList.setAdapter(mAdapter);
-    //}
-
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
@@ -344,6 +372,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+
+                // Redraw markers of only the selected types
+                drawCategoryMarker(selectedTypes);
 
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
