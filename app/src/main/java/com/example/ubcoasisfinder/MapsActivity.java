@@ -185,20 +185,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         if (id == R.id.drawer_item_mw) {
-            if (item.isChecked()) item.setChecked(false);
-            else item.setChecked(true);
+
+            CheckBox cb = (CheckBox) item.getActionView();
+
+            if (cb.isChecked()) cb.setChecked(false);
+            else cb.setChecked(true);
+
         } else if (id == R.id.drawer_item_vm) {
-            if (item.isChecked()) item.setChecked(false);
-            else item.setChecked(true);
+            CheckBox cb = (CheckBox) item.getActionView();
+
+            if (cb.isChecked()) cb.setChecked(false);
+            else cb.setChecked(true);
+
         } else if (id == R.id.drawer_item_wf) {
-            if (item.isChecked()) item.setChecked(false);
-            else item.setChecked(true);
+
+            CheckBox cb = (CheckBox) item.getActionView();
+
+            if (cb.isChecked()) cb.setChecked(false);
+            else cb.setChecked(true);
+
         } else if (id == R.id.drawer_item_about) {
+
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
+
         } else if (id == R.id.drawer_item_feedback) {
+
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
+
         }
         return true;
     }
