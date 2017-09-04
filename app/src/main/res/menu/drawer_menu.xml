@@ -3,13 +3,6 @@
     <group
         android:id="@+id/drawer_list"
         android:checkableBehavior="none">
-        <!--<item
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/drawer_item_mw"
-            android:title="Microwaves"
-            android:visible="true"
-            android:actionLayout="@layout/action_layout_checkbox"
-            app:showAsAction="ifRoom|withText"/>-->
         <item
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/drawer_item_mw"
@@ -34,10 +27,10 @@
         <menu>
             <item
                 android:id="@+id/drawer_item_about"
-                android:title="Share"/>
+                android:title="About"/>
             <item
                 android:id="@+id/drawer_item_feedback"
-                android:title="Send"/>
+                android:title="Send Feedback"/>
         </menu>
     </item>
 </menu>

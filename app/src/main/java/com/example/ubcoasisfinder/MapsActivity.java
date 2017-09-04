@@ -163,6 +163,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+
     // FOR MENU ITEMS
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -192,6 +193,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             else cb.setChecked(true);
 
         } else if (id == R.id.drawer_item_vm) {
+
             CheckBox cb = (CheckBox) item.getActionView();
 
             if (cb.isChecked()) cb.setChecked(false);
