@@ -6,7 +6,9 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,7 +47,7 @@ import model.OasisManager;
 import parsers.OasisResourcesParser;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleMap.OnMarkerClickListener {
+        GoogleMap.OnMarkerClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
 
@@ -71,8 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
-
-        //mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawer.setNavigationItemSelectedListener(this);
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
@@ -161,32 +163,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
-    // TODO
+    // FOR MENU ITEMS
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         switch (item.getItemId()) {
-            case R.id.drawer_item_mw:
-                //Write your code
-                return true;
-            case R.id.drawer_item_vm:
-                //Write your code
-                return true;
-            case R.id.drawer_item_wf:
-                //Write your code
-                return true;
-            case R.id.drawer_item_about:
-                //Write your code
-                return true;
-            case R.id.drawer_item_feedback:
-                //Write your code
-                return true;
+//            case R.id.drawer_item_mw:
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // FOR NAV DRAWER ITEMS
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.drawer_item_mw) {
+            if (item.isChecked()) item.setChecked(false);
+            else item.setChecked(true);
+        } else if (id == R.id.drawer_item_vm) {
+            if (item.isChecked()) item.setChecked(false);
+            else item.setChecked(true);
+        } else if (id == R.id.drawer_item_wf) {
+            if (item.isChecked()) item.setChecked(false);
+            else item.setChecked(true);
+        } else if (id == R.id.drawer_item_about) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.drawer_item_feedback) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        return true;
     }
 
     // Show info window when user clicks a marker
@@ -313,6 +327,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
