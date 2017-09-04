@@ -1,5 +1,6 @@
 package com.example.ubcoasisfinder;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
@@ -88,13 +89,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Set all checkboxes as checked initially
         selectedTypes = new LinkedList<>();
-        int i = 0;
 
         for (Amenity thisAmenity : Amenity.values()) {
-            CheckBox cb = (CheckBox) mDrawer.getMenu().getItem(i).getActionView();
+            CheckBox cb = (CheckBox) mDrawer.getMenu().getItem(thisAmenity.getItemNumber()).getActionView();
             cb.setChecked(true);
             selectedTypes.add(thisAmenity.getDisplayName());
-            i++;
         }
 
         setupDrawer();
@@ -198,43 +197,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.drawer_item_mw) {
+        if (id == R.id.drawer_item_mw || id == R.id.drawer_item_vm || id == R.id.drawer_item_wf) {
 
             CheckBox cb = (CheckBox) item.getActionView();
 
             if (cb.isChecked()) {
                 cb.setChecked(false);
-                selectedTypes.remove(Amenity.MICROWAVE.getDisplayName());
             }
             else {
                 cb.setChecked(true);
-                selectedTypes.add(Amenity.MICROWAVE.getDisplayName());
-            }
-
-        } else if (id == R.id.drawer_item_vm) {
-
-            CheckBox cb = (CheckBox) item.getActionView();
-
-            if (cb.isChecked()) {
-                cb.setChecked(false);
-                selectedTypes.remove(Amenity.VENDINGMACHINE.getDisplayName());
-            }
-            else {
-                cb.setChecked(true);
-                selectedTypes.add(Amenity.VENDINGMACHINE.getDisplayName());
-            }
-
-        } else if (id == R.id.drawer_item_wf) {
-
-            CheckBox cb = (CheckBox) item.getActionView();
-
-            if (cb.isChecked()) {
-                cb.setChecked(false);
-                selectedTypes.remove(Amenity.WATERFOUNTAIN.getDisplayName());
-            }
-            else {
-                cb.setChecked(true);
-                selectedTypes.add(Amenity.WATERFOUNTAIN.getDisplayName());
             }
 
         } else if (id == R.id.drawer_item_about) {
@@ -358,6 +329,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    // Before closing the side drawer, check the state of the checkboxes and then updated the selectedTypes
+    private void getCheckBoxState() {
+
+        for (Amenity thisAmenity : Amenity.values()) {
+            CheckBox cb = (CheckBox) mDrawer.getMenu().getItem(thisAmenity.getItemNumber()).getActionView();
+
+            if (cb.isChecked() && !selectedTypes.contains(thisAmenity.getDisplayName())) {
+                selectedTypes.add(thisAmenity.getDisplayName());
+            }
+            else if (!cb.isChecked() && selectedTypes.contains(thisAmenity.getDisplayName())) {
+                selectedTypes.remove(thisAmenity.getDisplayName());
+            }
+        }
+    }
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -374,6 +359,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onDrawerClosed(View view) {
 
                 // Redraw markers of only the selected types
+                getCheckBoxState();
                 drawCategoryMarker(selectedTypes);
 
                 super.onDrawerClosed(view);
