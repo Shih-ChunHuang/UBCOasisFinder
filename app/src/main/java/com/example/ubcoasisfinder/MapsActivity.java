@@ -1,14 +1,21 @@
 package com.example.ubcoasisfinder;
 
+import android.*;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,11 +25,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.PermissionRequest;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +53,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.ToDoubleBiFunction;
 
 
 import model.Amenity;
@@ -63,6 +73,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String mActivityTitle;
     private List<String> selectedTypes;
 
+    private LatLng myPosition;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
     final LatLngBounds UBCBound = new LatLngBounds(
             new LatLng(49.24, -123.26), new LatLng(49.28, -123.23));
 
@@ -79,7 +93,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Set up navigational drawer
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Set up action bar
         mActivityTitle = getTitle().toString();
@@ -152,14 +166,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Restrict bound to UBC area
         mMap.setLatLngBoundsForCameraTarget(UBCBound);
 
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setRotateGesturesEnabled(true);
+        mMap.getUiSettings().setScrollGesturesEnabled(true);
+        mMap.getUiSettings().setTiltGesturesEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+
+        enableMyLocation();
+
+
         //drawMarker();
         drawCategoryMarker(null);
 
         // Add a marker in UBC and move the camera
         LatLng UBC = new LatLng(49.2606, -123.2460);
 
-        // TODO
-        // click check box and filter one kind of oasis
 
         // the default location will be UBC with zoom-in effect
         float zoomLevel = (float) 14.0; //This goes up to 21
@@ -167,6 +188,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    private void enableMyLocation(){
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED)
+        {
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            mMap.setMyLocationEnabled(true);
+            mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
+                @Override
+                public boolean onMyLocationButtonClick()
+                {
+                    return false;
+                }
+            });
+
+        } else {
+            // Show rationale and request permission.
+            // ToDo
+
+        }
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
